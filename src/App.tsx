@@ -5,14 +5,14 @@ function App() {
   
 
   return (
-    <>
-      <div>
-       
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+   <div className='App'>
+    <h1>
+      Magic Match
+    </h1>
+    <button>
+      New Game
+    </button>
+   </div>
   )
 }
 
