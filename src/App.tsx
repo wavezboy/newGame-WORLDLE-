@@ -43,8 +43,10 @@ function App() {
       New Game
     </button>
 
-  {cardImages.map(()=>(
-    <div></div>
+  {cardImages.map((card, i)=>(
+    <div key={i}>
+      <img src={card.src} alt="" />
+    </div>
   ))}
     
    </div>
