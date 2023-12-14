@@ -27,6 +27,7 @@ function App() {
      .map((card)=>({...card, id: Math.random()}))
     setCards(shuffledCards)
     setTurns(0)
+  
   }
 
 
@@ -41,6 +42,10 @@ function App() {
     <button onClick={shuffleCards}>
       New Game
     </button>
+
+  {cardImages.map(()=>(
+    <div></div>
+  ))}
     
    </div>
   )
