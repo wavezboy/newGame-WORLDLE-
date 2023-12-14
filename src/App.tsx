@@ -8,11 +8,11 @@ interface card {
 
 const cardImages = [
   {"src": "/img/helmet-1.png"},
-  {"src": "/img/helmet-1.png"},
-  {"src": "/img/helmet-1.png"},
-  {"src": "/img/helmet-1.png"},
-  {"src": "/img/helmet-1.png"},
-  {"src": "/img/helmet-1.png"},
+  {"src": "/img/portion-1.png"},
+  {"src": "/img/ring-1.png"},
+  {"src": "/img/scroll-1.png"},
+  {"src": "/img/sheild-1.png"},
+  {"src": "/img/sword-1.png"},
 ]
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
 
     const shuffledCards = [...cardImages, ...cardImages]
      .sort(()=> Math.random() - 0.5)
-     .map((card)=>({...card, id: Math.random()}))
+     .map((card)=>({...card, id: Math.round(Math.random() * 100)}))
     setCards(shuffledCards)
     setTurns(0)
   
