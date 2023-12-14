@@ -2,32 +2,39 @@ import { useState } from 'react'
 import './App.css'
 
 interface card {
-  card: object
+  src : string
 }
 
 
 const cardImages = [
   {"src": "/img/helmet-1.png"},
-  {"src": "/img/portion-1.png"},
+  {"src": "/img/potion-1.png"},
   {"src": "/img/ring-1.png"},
   {"src": "/img/scroll-1.png"},
-  {"src": "/img/sheild-1.png"},
+  {"src": "/img/shield-1.png"},
   {"src": "/img/sword-1.png"},
 ]
 
 function App() {
-  const [cards, setCards] = useState<object>([])
+  const [cards, setCards] = useState<card[]>([])
   const [turns, setTurns] = useState<number>()
-
+  const [cover, setCover] = useState("cover")
+  const [original, setOriginal] = useState("original")
   // shuffle cards
   const shuffleCards = () => {
 
     const shuffledCards = [...cardImages, ...cardImages]
      .sort(()=> Math.random() - 0.5)
-     .map((card)=>({...card, id: Math.round(Math.random() * 100)}))
+     .map((card)=>({...card, id: Math.random()}))
     setCards(shuffledCards)
     setTurns(0)
   
+  }
+
+
+  const makeClick = () => {
+    setCover("original")
+    setOriginal("cover")
   }
 
 
@@ -43,12 +50,15 @@ function App() {
       New Game
     </button>
 
-  {cardImages.map((card, i)=>(
-    <div key={i}>
-      <img src={card.src} alt="" />
+  <div className='cd'>
+    
+   {cards.map((card, i)=>(
+    <div className='container' onClick={makeClick}  key={i}>
+      <img className={cover} src="/img/cover.png" alt="" />
+      <img className={original} src={card.src} alt="" />
     </div>
   ))}
-    
+     </div>
    </div>
   )
 }

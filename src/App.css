@@ -19,3 +19,19 @@ button:hover {
   background: #c23866;
   color: #fff;
 }
+
+.cd{
+  margin-top: 2rem;
+ display: grid;
+ grid-template-columns: auto auto auto auto;
+}
+
+.container{
+  position: relative;
+}
+
+.cover{
+  position: absolute;
+  left: 0;
+  top: 0
+}
