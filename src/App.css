@@ -1,7 +1,6 @@
 .App {
   max-width: 860px;
   margin: 40px auto;
-
 }
 
 button {
@@ -20,18 +19,40 @@ button:hover {
   color: #fff;
 }
 
-.cd{
+.cd {
   margin-top: 2rem;
- display: grid;
- grid-template-columns: auto auto auto auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 20px;
 }
 
-.container{
+.container {
   position: relative;
+  width: 200px;
+  height: 200px;
+  border: 2px solid white;
+  overflow: hidden;
 }
 
-.cover{
+.container.disable {
+  cursor: default;
+}
+
+.cover {
   position: absolute;
   left: 0;
-  top: 0
+  top: 0;
+}
+
+.show {
+  z-index: 1;
+}
+
+p {
+  margin-top: 2rem;
+}
+
+span {
+  font-weight: bold;
+  font-size: 3rem;
 }
