@@ -22,6 +22,7 @@ function App() {
   const [turns, setTurns] = useState<number>(0);
   const [firstGuess, setFirstGuess] = useState<card | null>();
   const [secondGuess, setSecondGuess] = useState<card | null>();
+  const [disable, setDisable] = useState<boolean>(false);
   // const [correctGuess, setCorrectGuess] = useState<string[]>([]);
 
   // shuffle cards
@@ -39,6 +40,7 @@ function App() {
 
   useEffect(() => {
     if (firstGuess && secondGuess) {
+      setDisable(true);
       if (firstGuess.src === secondGuess.src) {
         const updatedCard = cards.map((card) => {
           if (card.src === firstGuess.src) {
@@ -64,6 +66,7 @@ function App() {
     setFirstGuess(null);
     setSecondGuess(null);
     setTurns((prev) => prev + 1);
+    setDisable(false);
   };
 
   // const handleClick = (card: card) => {
@@ -109,6 +112,7 @@ function App() {
             handleChoice={handleChoice}
             key={card.id}
             flipped={card == firstGuess || secondGuess == card || card.matched}
+            disable={disable}
           />
         ))}
       </div>

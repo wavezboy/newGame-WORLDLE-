@@ -5,11 +5,19 @@ interface PropsBody {
   card: card;
   handleChoice: (card: card) => void;
   flipped: boolean;
+  disable: boolean;
 }
 
-export default function Singlecard({ card, handleChoice, flipped }: PropsBody) {
+export default function Singlecard({
+  card,
+  handleChoice,
+  flipped,
+  disable,
+}: PropsBody) {
   const handleClick = () => {
-    handleChoice(card);
+    if (!disable) {
+      handleChoice(card);
+    }
   };
   return (
     <div className="card">
