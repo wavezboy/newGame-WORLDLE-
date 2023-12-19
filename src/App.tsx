@@ -5,6 +5,7 @@ import Singlecard from "./components/Singlecard";
 export interface card {
   src: string;
   id: number;
+  matched: boolean;
 }
 
 const cardImages = [
@@ -52,10 +53,12 @@ function App() {
         resetTurn();
       } else {
         console.log("cards doesnt match");
-        resetTurn();
+        setTimeout(() => resetTurn(), 1000);
       }
     }
   }, [cards, firstGuess, secondGuess]);
+
+  console.log(cards);
 
   const resetTurn = () => {
     setFirstGuess(null);
@@ -99,9 +102,14 @@ function App() {
         New Game
       </button>
 
-      <div className="cd">
+      <div className="container">
         {cards.map((card) => (
-          <Singlecard card={card} handleChoice={handleChoice} />
+          <Singlecard
+            card={card}
+            handleChoice={handleChoice}
+            key={card.id}
+            flipped={card == firstGuess || secondGuess == card || card.matched}
+          />
         ))}
       </div>
 

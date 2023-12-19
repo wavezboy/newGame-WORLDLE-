@@ -4,22 +4,24 @@ import "./Singlecard.css";
 interface PropsBody {
   card: card;
   handleChoice: (card: card) => void;
+  flipped: boolean;
 }
 
-export default function Singlecard({ card, handleChoice }: PropsBody) {
+export default function Singlecard({ card, handleChoice, flipped }: PropsBody) {
   const handleClick = () => {
     handleChoice(card);
   };
   return (
-    <div
-      className="container"
-      key={card.id}
-      onClick={() => {
-        handleClick;
-      }}
-    >
-      <img src="/img/cover.png" alt="" className="cover" />
-      <img src={card.src} alt="" />
+    <div className="card">
+      <div className={flipped ? "flipped" : ""}>
+        <img src={card.src} alt="" className="front" />
+        <img
+          src="/img/cover.png"
+          alt=""
+          className="cover"
+          onClick={handleClick}
+        />
+      </div>
     </div>
   );
 }
