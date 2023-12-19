@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import Singlecard from "./components/Singlecard";
 
-interface card {
+export interface card {
   src: string;
   id: number;
 }
 
 const cardImages = [
-  { src: "/img/helmet-1.png" },
-  { src: "/img/potion-1.png" },
-  { src: "/img/ring-1.png" },
-  { src: "/img/scroll-1.png" },
-  { src: "/img/shield-1.png" },
-  { src: "/img/sword-1.png" },
+  { src: "/img/helmet-1.png", matched: false },
+  { src: "/img/potion-1.png", matched: false },
+  { src: "/img/ring-1.png", matched: false },
+  { src: "/img/scroll-1.png", matched: false },
+  { src: "/img/shield-1.png", matched: false },
+  { src: "/img/sword-1.png", matched: false },
 ];
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
   const [turns, setTurns] = useState<number>(0);
   const [firstGuess, setFirstGuess] = useState<card | null>();
   const [secondGuess, setSecondGuess] = useState<card | null>();
-  const [correctGuess, setCorrectGuess] = useState<string[]>([]);
+  // const [correctGuess, setCorrectGuess] = useState<string[]>([]);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -31,38 +32,67 @@ function App() {
     setTurns(0);
   };
 
-  const handleClick = (card: card) => {
-    if (firstGuess) {
-      setSecondGuess(card);
-
-      setTimeout(() => {
-        checkCorrectGuess(card);
-      }, 100);
-    } else {
-      setFirstGuess(card);
-    }
+  const handleChoice = (card: card) => {
+    firstGuess ? setSecondGuess(card) : setFirstGuess(card);
   };
 
-  const checkCorrectGuess = (card: card) => {
-    if (firstGuess?.src === card?.src) {
-      setCorrectGuess([...correctGuess, card.src]);
-    }
+  useEffect(() => {
+    if (firstGuess && secondGuess) {
+      if (firstGuess.src === secondGuess.src) {
+        const updatedCard = cards.map((card) => {
+          if (card.src === firstGuess.src) {
+            return { ...card, matched: true };
+          } else {
+            return card;
+          }
+        });
 
+        setCards(updatedCard);
+
+        resetTurn();
+      } else {
+        console.log("cards doesnt match");
+        resetTurn();
+      }
+    }
+  }, [cards, firstGuess, secondGuess]);
+
+  const resetTurn = () => {
     setFirstGuess(null);
     setSecondGuess(null);
     setTurns((prev) => prev + 1);
   };
 
+  // const handleClick = (card: card) => {
+  //   if (firstGuess) {
+  //     setSecondGuess(card);
+
+  //     setTimeout(() => {
+  //       checkCorrectGuess(card);
+  //     }, 100);
+  //   } else {
+  //     setFirstGuess(card);
+  //   }
+  // };
+
+  // const checkCorrectGuess = (card: card) => {
+  //   if (firstGuess?.src === card?.src) {
+  //     setCorrectGuess([...correctGuess, card.src]);
+  //   }
+
+  //   setFirstGuess(null);
+  //   setSecondGuess(null);
+  //   setTurns((prev) => prev + 1);
+  // };
+
   // console.log(firstGuess);
   // console.log(secondGuess);
-  console.log(correctGuess);
 
   return (
     <div className="App">
       <h1>Magic Match</h1>
       <button
         onClick={() => {
-          setCorrectGuess([]);
           shuffleCards();
         }}
       >
@@ -70,27 +100,8 @@ function App() {
       </button>
 
       <div className="cd">
-        {cards.map((card, i) => (
-          <div
-            className="container"
-            key={i}
-            onClick={() => {
-              handleClick(card);
-            }}
-          >
-            <img src="/img/cover.png" alt="" className="cover" />
-            <img
-              src={card.src}
-              alt=""
-              className={
-                firstGuess?.id === card.id ||
-                secondGuess?.id === card.id ||
-                correctGuess.includes(card.src)
-                  ? "cover"
-                  : ""
-              }
-            />
-          </div>
+        {cards.map((card) => (
+          <Singlecard card={card} handleChoice={handleChoice} />
         ))}
       </div>
 

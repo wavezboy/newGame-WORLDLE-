@@ -27,26 +27,8 @@ button:hover {
   flex-wrap: wrap;
 }
 
-.container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  border: 2px solid white;
-  overflow: hidden;
-}
-
 .container.disable {
   cursor: default;
-}
-
-.cover {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-.show {
-  z-index: 1;
 }
 
 p {
