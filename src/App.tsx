@@ -60,8 +60,6 @@ function App() {
     }
   }, [cards, firstGuess, secondGuess]);
 
-  console.log(cards);
-
   const resetTurn = () => {
     setFirstGuess(null);
     setSecondGuess(null);
