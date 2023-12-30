@@ -54,7 +54,6 @@ function App() {
 
         resetTurn();
       } else {
-        console.log("cards doesnt match");
         setTimeout(() => resetTurn(), 1000);
       }
     }
